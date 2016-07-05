@@ -22,7 +22,7 @@ vagrant up
 Log into phpLDAPadmin  
 http://127.0.0.1:8080/phpldapadmin
 ````
-user: cn=admin,dc=vagrant,dc=local
+user: cn=admin,dc=localhost
 password: P@55w0rd
 ````
 
@@ -79,8 +79,9 @@ Example Playbook
 - hosts: all
   become: true
   vars:
-    - openldap_base: 'dc=vagrant,dc=local'
-    - pri_domain_name: vagrant.local
+    - openldap_base: 'dc=localhost'
+    - pri_domain_name: localhost
+    - openldap_populate: true
   roles:
     - role: ansible-etc-hosts
     - role: ansible-openldap
@@ -92,8 +93,9 @@ Example Playbook
 - hosts: all
   become: true
   vars:
-    - openldap_base: 'dc=vagrant,dc=local'
-    - pri_domain_name: vagrant.local
+    - openldap_base: 'dc=localhost'
+    - pri_domain_name: localhost
+    - openldap_populate: true
   roles:
     - role: mrlesmithjr.etc-hosts
     - role: mrlesmithjr.openldap
