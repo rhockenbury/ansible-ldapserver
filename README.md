@@ -1,35 +1,35 @@
-Role Name
+Ansible-OpenLdap
 =========
 
 Installs and configures OpenLDAP and phpLDAPadmin  
 http://www.openldap.org/
 
-Requirements
-------------
-
+## Getting started:
 Install requirements using Ansible Galaxy.
 ````
 sudo ansible-galaxy install -r requirements.yml -f
 ````
 
-Vagrant
--------
-Spin up Vagrant environment
+Spin up Vagrant environment.
 ````
 vagrant up
 ````
 
-Log into phpLDAPadmin  
-http://127.0.0.1:8080/phpldapadmin
-````
+## Test
+```
+ldapsearch -H ldap://localhost:1389 -x -D cn=admin,dc=localhost -w P@55w0rd -b ou=People,dc=localhost "(uid=john)"
+```
+
+## Manage
+Go to [`http://localhost:8080/phpldapadmin`](http://localhost:8080/phpldapadmin) and login with
+```
 user: cn=admin,dc=localhost
 password: P@55w0rd
-````
+```
 
-Role Variables
---------------
+## Role Variables
 
-````
+```
 ---
 # defaults file for ansible-openldap
 openldap_admin_password: 'P@55w0rd'
@@ -61,20 +61,12 @@ openldap_users:
     loginShell: /bin/bash
     homeDirectory: /home/john
 pri_domain_name: 'example.org'
-````
+```
 
-Dependencies
-------------
-
-Install via info in requirements  
-ansible-etc-hosts
-
-
-Example Playbook
-----------------
+## Example Playbooks
 
 #### GitHub
-````
+```
 ---
 - hosts: all
   become: true
@@ -86,9 +78,10 @@ Example Playbook
     - role: ansible-etc-hosts
     - role: ansible-openldap
   tasks:
-````
+```
+
 #### Galaxy
-````
+```
 ---
 - hosts: all
   become: true
@@ -100,17 +93,7 @@ Example Playbook
     - role: mrlesmithjr.etc-hosts
     - role: mrlesmithjr.openldap
   tasks:
-````
+```
 
-License
--------
-
+## License
 BSD
-
-Author Information
-------------------
-
-Larry Smith Jr.
-- @mrlesmithjr
-- http://everythingshouldbevirtual.com
-- mrlesmithjr [at] gmail.com

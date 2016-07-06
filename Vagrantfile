@@ -11,8 +11,8 @@ Vagrant.configure(2) do |config|
     openldap.vm.hostname = "openldap"
 
     openldap.vm.network :private_network, ip: "192.168.202.201"
-    openldap.vm.network :forwarded_port, guest: 80, host: 8080
-    openldap.vm.network :forwarded_port, guest: 389, host: 1389
+    openldap.vm.network :forwarded_port, guest: 80, host: 8080   # console access
+    openldap.vm.network :forwarded_port, guest: 389, host: 1389  # ldap protocol
 
     openldap.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
